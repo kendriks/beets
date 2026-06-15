@@ -795,7 +795,7 @@ class Model(ABC, Generic[D]):
 AnyModel = TypeVar("AnyModel", bound=Model)
 
 
-class Results(Generic[AnyModel]):
+class Results(Generic[AnyModel]):  # pylint: disable=too-many-instance-attributes
     """An item query result set. Iterating over the collection lazily
     constructs Model objects that reflect database rows.
     """

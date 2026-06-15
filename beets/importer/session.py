@@ -45,6 +45,7 @@ class ImportAbortError(Exception):
     pass
 
 
+# pylint: disable=too-many-instance-attributes
 class ImportSession:
     """Controls an import action. Subclasses should implement methods to
     communicate with the user or otherwise make decisions.

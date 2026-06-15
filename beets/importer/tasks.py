@@ -129,6 +129,7 @@ class BaseImportTask:
         self.items = list(items) if items is not None else []
 
 
+# pylint: disable-next=too-many-instance-attributes
 class ImportTask(BaseImportTask):
     """Represents a single set of items to be imported along with its
     intermediate state. May represent an album or a single item.

@@ -146,7 +146,7 @@ class AttrDict(dict[str, V]):
         return id(self)
 
 
-class Info(AttrDict[Any]):
+class Info(AttrDict[Any]):  # pylint: disable=too-many-instance-attributes
     """Container for metadata about a musical entity."""
 
     Identifier = tuple[str | None, str | None]
@@ -274,7 +274,7 @@ class Info(AttrDict[Any]):
         return list_value
 
 
-class AlbumInfo(Info):
+class AlbumInfo(Info):  # pylint: disable=too-many-instance-attributes
     """Metadata snapshot representing a single album candidate.
 
     Aggregates track entries and album-wide context gathered from an external
@@ -397,7 +397,7 @@ class AlbumInfo(Info):
         super().__init__(**kwargs)
 
 
-class TrackInfo(Info):
+class TrackInfo(Info):  # pylint: disable=too-many-instance-attributes
     """Metadata snapshot for a single track candidate.
 
     Captures identifying details and creative credits used to compare against

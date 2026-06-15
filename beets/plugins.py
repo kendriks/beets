@@ -150,6 +150,7 @@ class BeetsPluginMeta(abc.ABCMeta):
     album_template_fields: ClassVar[TFuncMap[Album]] = {}
 
 
+# pylint: disable-next=too-many-instance-attributes
 class BeetsPlugin(metaclass=BeetsPluginMeta):
     """The base class for all beets plugins. Plugins provide
     functionality by defining a subclass of BeetsPlugin and overriding
