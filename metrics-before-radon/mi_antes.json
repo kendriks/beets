@@ -1,0 +1,278 @@
+{
+  "beets\\context.py": {
+    "mi": 100.0,
+    "rank": "A"
+  },
+  "beets\\exceptions.py": {
+    "mi": 100.0,
+    "rank": "A"
+  },
+  "beets\\logging.py": {
+    "mi": 72.02345224692668,
+    "rank": "A"
+  },
+  "beets\\mediafile.py": {
+    "mi": 79.58301605572906,
+    "rank": "A"
+  },
+  "beets\\metadata_plugins.py": {
+    "mi": 57.957960395365525,
+    "rank": "A"
+  },
+  "beets\\plugins.py": {
+    "mi": 41.972603712743926,
+    "rank": "A"
+  },
+  "beets\\__init__.py": {
+    "mi": 100.0,
+    "rank": "A"
+  },
+  "beets\\__main__.py": {
+    "mi": 53.37023475215344,
+    "rank": "A"
+  },
+  "beets\\autotag\\distance.py": {
+    "mi": 35.91659672874692,
+    "rank": "A"
+  },
+  "beets\\autotag\\hooks.py": {
+    "mi": 39.92148156399434,
+    "rank": "A"
+  },
+  "beets\\autotag\\match.py": {
+    "mi": 44.01041655407885,
+    "rank": "A"
+  },
+  "beets\\autotag\\__init__.py": {
+    "mi": 98.0557408976636,
+    "rank": "A"
+  },
+  "beets\\dbcore\\db.py": {
+    "mi": 12.514536506252565,
+    "rank": "B"
+  },
+  "beets\\dbcore\\pathutils.py": {
+    "mi": 51.842243104797014,
+    "rank": "A"
+  },
+  "beets\\dbcore\\query.py": {
+    "mi": 24.22193446102691,
+    "rank": "A"
+  },
+  "beets\\dbcore\\queryparse.py": {
+    "mi": 63.9537244591434,
+    "rank": "A"
+  },
+  "beets\\dbcore\\sort.py": {
+    "mi": 58.38277407262288,
+    "rank": "A"
+  },
+  "beets\\dbcore\\types.py": {
+    "mi": 47.49959098528916,
+    "rank": "A"
+  },
+  "beets\\dbcore\\__init__.py": {
+    "mi": 100.0,
+    "rank": "A"
+  },
+  "beets\\importer\\session.py": {
+    "mi": 53.63197165430527,
+    "rank": "A"
+  },
+  "beets\\importer\\stages.py": {
+    "mi": 56.86813916949017,
+    "rank": "A"
+  },
+  "beets\\importer\\state.py": {
+    "mi": 71.47570046523295,
+    "rank": "A"
+  },
+  "beets\\importer\\tasks.py": {
+    "mi": 13.438879453482231,
+    "rank": "B"
+  },
+  "beets\\importer\\__init__.py": {
+    "mi": 100.0,
+    "rank": "A"
+  },
+  "beets\\library\\exceptions.py": {
+    "mi": 100.0,
+    "rank": "A"
+  },
+  "beets\\library\\fields.py": {
+    "mi": 100.0,
+    "rank": "A"
+  },
+  "beets\\library\\library.py": {
+    "mi": 63.492204146506545,
+    "rank": "A"
+  },
+  "beets\\library\\migrations.py": {
+    "mi": 42.918378072780655,
+    "rank": "A"
+  },
+  "beets\\library\\models.py": {
+    "mi": 6.209245029320698,
+    "rank": "C"
+  },
+  "beets\\library\\queries.py": {
+    "mi": 100.0,
+    "rank": "A"
+  },
+  "beets\\library\\__init__.py": {
+    "mi": 74.30834038330268,
+    "rank": "A"
+  },
+  "beets\\test\\helper.py": {
+    "mi": 29.899925849709685,
+    "rank": "A"
+  },
+  "beets\\test\\_common.py": {
+    "mi": 69.39042978573714,
+    "rank": "A"
+  },
+  "beets\\test\\__init__.py": {
+    "mi": 100.0,
+    "rank": "A"
+  },
+  "beets\\ui\\__init__.py": {
+    "mi": 28.450495005409632,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\completion.py": {
+    "mi": 70.94626931799537,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\config.py": {
+    "mi": 70.62175758171985,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\fields.py": {
+    "mi": 100.0,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\help.py": {
+    "mi": 71.56445696095467,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\list.py": {
+    "mi": 92.3933254265675,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\modify.py": {
+    "mi": 62.53156322556095,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\move.py": {
+    "mi": 58.933314291765974,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\remove.py": {
+    "mi": 74.99216182133111,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\stats.py": {
+    "mi": 59.60910559819647,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\update.py": {
+    "mi": 60.49344360196491,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\utils.py": {
+    "mi": 87.57295846496959,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\version.py": {
+    "mi": 100.0,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\write.py": {
+    "mi": 82.26952166749717,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\__init__.py": {
+    "mi": 100.0,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\import_\\display.py": {
+    "mi": 43.576396541406815,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\import_\\session.py": {
+    "mi": 38.82213336907392,
+    "rank": "A"
+  },
+  "beets\\ui\\commands\\import_\\__init__.py": {
+    "mi": 52.67190959742199,
+    "rank": "A"
+  },
+  "beets\\util\\artresizer.py": {
+    "mi": 33.152252375637026,
+    "rank": "A"
+  },
+  "beets\\util\\bluelet.py": {
+    "mi": 40.60345087710358,
+    "rank": "A"
+  },
+  "beets\\util\\color.py": {
+    "mi": 64.31299644325112,
+    "rank": "A"
+  },
+  "beets\\util\\config.py": {
+    "mi": 71.01604225559872,
+    "rank": "A"
+  },
+  "beets\\util\\deprecation.py": {
+    "mi": 76.28036568433795,
+    "rank": "A"
+  },
+  "beets\\util\\diff.py": {
+    "mi": 65.83185447353496,
+    "rank": "A"
+  },
+  "beets\\util\\extension.py": {
+    "mi": 67.34459047734484,
+    "rank": "A"
+  },
+  "beets\\util\\functemplate.py": {
+    "mi": 42.13971174731031,
+    "rank": "A"
+  },
+  "beets\\util\\hidden.py": {
+    "mi": 77.9247042477118,
+    "rank": "A"
+  },
+  "beets\\util\\id_extractors.py": {
+    "mi": 100.0,
+    "rank": "A"
+  },
+  "beets\\util\\layout.py": {
+    "mi": 48.914240501967676,
+    "rank": "A"
+  },
+  "beets\\util\\lyrics.py": {
+    "mi": 55.91548534571065,
+    "rank": "A"
+  },
+  "beets\\util\\m3u.py": {
+    "mi": 78.86958784401881,
+    "rank": "A"
+  },
+  "beets\\util\\pathformats.py": {
+    "mi": 100.0,
+    "rank": "A"
+  },
+  "beets\\util\\pipeline.py": {
+    "mi": 49.550487557387065,
+    "rank": "A"
+  },
+  "beets\\util\\units.py": {
+    "mi": 75.01173319734721,
+    "rank": "A"
+  },
+  "beets\\util\\__init__.py": {
+    "mi": 26.32828750611322,
+    "rank": "A"
+  }
+}

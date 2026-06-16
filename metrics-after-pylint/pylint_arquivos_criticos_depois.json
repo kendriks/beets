@@ -1,0 +1,394 @@
+[
+  {
+    "arquivo": "beets\\test\\helper.py",
+    "warning": 23,
+    "total": 78,
+    "convention": 47,
+    "refactor": 8
+  },
+  {
+    "arquivo": "beets\\dbcore\\db.py",
+    "convention": 9,
+    "total": 75,
+    "warning": 39,
+    "refactor": 15,
+    "error": 12
+  },
+  {
+    "arquivo": "beets\\importer\\tasks.py",
+    "convention": 19,
+    "total": 72,
+    "warning": 17,
+    "refactor": 10,
+    "error": 26
+  },
+  {
+    "arquivo": "beets\\library\\models.py",
+    "convention": 12,
+    "total": 56,
+    "error": 13,
+    "warning": 23,
+    "refactor": 8
+  },
+  {
+    "arquivo": "beets\\util\\artresizer.py",
+    "warning": 18,
+    "total": 53,
+    "convention": 13,
+    "refactor": 22
+  },
+  {
+    "arquivo": "beets\\util\\__init__.py",
+    "convention": 4,
+    "total": 50,
+    "refactor": 37,
+    "warning": 9
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\import_\\session.py",
+    "convention": 15,
+    "total": 39,
+    "refactor": 20,
+    "warning": 3,
+    "error": 1
+  },
+  {
+    "arquivo": "beets\\ui\\__init__.py",
+    "convention": 13,
+    "total": 34,
+    "refactor": 10,
+    "warning": 11
+  },
+  {
+    "arquivo": "beets\\util\\bluelet.py",
+    "convention": 15,
+    "total": 34,
+    "warning": 4,
+    "refactor": 15
+  },
+  {
+    "arquivo": "beets\\plugins.py",
+    "convention": 16,
+    "total": 25,
+    "warning": 7,
+    "refactor": 2
+  },
+  {
+    "arquivo": "beets\\dbcore\\query.py",
+    "warning": 9,
+    "total": 25,
+    "convention": 7,
+    "refactor": 9
+  },
+  {
+    "arquivo": "beets\\importer\\session.py",
+    "convention": 8,
+    "total": 23,
+    "warning": 6,
+    "error": 8,
+    "refactor": 1
+  },
+  {
+    "arquivo": "beets\\dbcore\\types.py",
+    "warning": 6,
+    "total": 22,
+    "convention": 8,
+    "refactor": 8
+  },
+  {
+    "arquivo": "beets\\importer\\stages.py",
+    "warning": 3,
+    "total": 22,
+    "convention": 1,
+    "error": 16,
+    "refactor": 2
+  },
+  {
+    "arquivo": "beets\\metadata_plugins.py",
+    "convention": 6,
+    "total": 21,
+    "warning": 11,
+    "error": 2,
+    "refactor": 2
+  },
+  {
+    "arquivo": "beets\\test\\_common.py",
+    "convention": 14,
+    "total": 20,
+    "refactor": 3,
+    "warning": 3
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\import_\\display.py",
+    "convention": 8,
+    "total": 20,
+    "warning": 1,
+    "refactor": 3,
+    "error": 8
+  },
+  {
+    "arquivo": "beets\\util\\pipeline.py",
+    "warning": 12,
+    "total": 19,
+    "error": 1,
+    "refactor": 6
+  },
+  {
+    "arquivo": "beets\\autotag\\distance.py",
+    "convention": 11,
+    "total": 18,
+    "error": 5,
+    "warning": 2
+  },
+  {
+    "arquivo": "beets\\util\\functemplate.py",
+    "refactor": 4,
+    "total": 18,
+    "convention": 3,
+    "warning": 11
+  },
+  {
+    "arquivo": "beets\\autotag\\hooks.py",
+    "convention": 7,
+    "total": 14,
+    "error": 1,
+    "refactor": 6
+  },
+  {
+    "arquivo": "beets\\util\\layout.py",
+    "convention": 10,
+    "total": 12,
+    "refactor": 2
+  },
+  {
+    "arquivo": "beets\\logging.py",
+    "refactor": 4,
+    "total": 10,
+    "convention": 6
+  },
+  {
+    "arquivo": "beets\\autotag\\match.py",
+    "convention": 8,
+    "total": 10,
+    "warning": 1,
+    "refactor": 1
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\update.py",
+    "convention": 3,
+    "total": 10,
+    "warning": 2,
+    "error": 1,
+    "refactor": 4
+  },
+  {
+    "arquivo": "beets\\dbcore\\queryparse.py",
+    "warning": 7,
+    "total": 9,
+    "refactor": 2
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\completion.py",
+    "convention": 2,
+    "total": 9,
+    "warning": 5,
+    "error": 2
+  },
+  {
+    "arquivo": "beets\\library\\migrations.py",
+    "convention": 3,
+    "total": 8,
+    "warning": 4,
+    "refactor": 1
+  },
+  {
+    "arquivo": "beets\\util\\extension.py",
+    "convention": 4,
+    "total": 8,
+    "warning": 4
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\config.py",
+    "convention": 1,
+    "total": 7,
+    "warning": 5,
+    "refactor": 1
+  },
+  {
+    "arquivo": "beets\\dbcore\\sort.py",
+    "warning": 4,
+    "total": 5,
+    "convention": 1
+  },
+  {
+    "arquivo": "beets\\importer\\state.py",
+    "convention": 1,
+    "total": 5,
+    "warning": 2,
+    "error": 2
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\fields.py",
+    "convention": 1,
+    "total": 5,
+    "warning": 4
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\help.py",
+    "convention": 2,
+    "total": 5,
+    "warning": 3
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\modify.py",
+    "refactor": 3,
+    "total": 5,
+    "warning": 1,
+    "convention": 1
+  },
+  {
+    "arquivo": "beets\\library\\library.py",
+    "convention": 2,
+    "total": 4,
+    "warning": 2
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\move.py",
+    "refactor": 3,
+    "total": 4,
+    "convention": 1
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\import_\\__init__.py",
+    "warning": 3,
+    "total": 4,
+    "convention": 1
+  },
+  {
+    "arquivo": "beets\\util\\m3u.py",
+    "warning": 3,
+    "total": 4,
+    "refactor": 1
+  },
+  {
+    "arquivo": "beets\\mediafile.py",
+    "convention": 1,
+    "total": 3,
+    "warning": 2
+  },
+  {
+    "arquivo": "beets\\util\\color.py",
+    "convention": 2,
+    "total": 3,
+    "error": 1
+  },
+  {
+    "arquivo": "beets\\util\\deprecation.py",
+    "convention": 3,
+    "total": 3
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\list.py",
+    "refactor": 1,
+    "total": 2,
+    "convention": 1
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\remove.py",
+    "refactor": 1,
+    "total": 2,
+    "convention": 1
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\version.py",
+    "convention": 1,
+    "total": 2,
+    "warning": 1
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\write.py",
+    "warning": 1,
+    "total": 2,
+    "convention": 1
+  },
+  {
+    "arquivo": "beets\\util\\config.py",
+    "convention": 2,
+    "total": 2
+  },
+  {
+    "arquivo": "beets\\util\\hidden.py",
+    "warning": 2,
+    "total": 2
+  },
+  {
+    "arquivo": "beets\\util\\lyrics.py",
+    "convention": 2,
+    "total": 2
+  },
+  {
+    "arquivo": "beets\\__init__.py",
+    "convention": 1,
+    "total": 1
+  },
+  {
+    "arquivo": "beets\\context.py",
+    "convention": 1,
+    "total": 1
+  },
+  {
+    "arquivo": "beets\\exceptions.py",
+    "convention": 1,
+    "total": 1
+  },
+  {
+    "arquivo": "beets\\dbcore\\pathutils.py",
+    "convention": 1,
+    "total": 1
+  },
+  {
+    "arquivo": "beets\\library\\exceptions.py",
+    "convention": 1,
+    "total": 1
+  },
+  {
+    "arquivo": "beets\\library\\fields.py",
+    "convention": 1,
+    "total": 1
+  },
+  {
+    "arquivo": "beets\\library\\queries.py",
+    "convention": 1,
+    "total": 1
+  },
+  {
+    "arquivo": "beets\\library\\__init__.py",
+    "convention": 1,
+    "total": 1
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\stats.py",
+    "convention": 1,
+    "total": 1
+  },
+  {
+    "arquivo": "beets\\ui\\commands\\utils.py",
+    "refactor": 1,
+    "total": 1
+  },
+  {
+    "arquivo": "beets\\util\\diff.py",
+    "convention": 1,
+    "total": 1
+  },
+  {
+    "arquivo": "beets\\util\\pathformats.py",
+    "convention": 1,
+    "total": 1
+  },
+  {
+    "arquivo": "beets\\util\\units.py",
+    "convention": 1,
+    "total": 1
+  }
+]

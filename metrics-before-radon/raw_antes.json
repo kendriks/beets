@@ -1,0 +1,623 @@
+{
+  "beets\\context.py": {
+    "loc": 25,
+    "lloc": 18,
+    "sloc": 14,
+    "comments": 1,
+    "multi": 0,
+    "blank": 7,
+    "single_comments": 4
+  },
+  "beets\\exceptions.py": {
+    "loc": 4,
+    "lloc": 2,
+    "sloc": 1,
+    "comments": 0,
+    "multi": 3,
+    "blank": 0,
+    "single_comments": 0
+  },
+  "beets\\logging.py": {
+    "loc": 211,
+    "lloc": 82,
+    "sloc": 115,
+    "comments": 31,
+    "multi": 26,
+    "blank": 38,
+    "single_comments": 32
+  },
+  "beets\\mediafile.py": {
+    "loc": 28,
+    "lloc": 7,
+    "sloc": 7,
+    "comments": 15,
+    "multi": 0,
+    "blank": 6,
+    "single_comments": 15
+  },
+  "beets\\metadata_plugins.py": {
+    "loc": 452,
+    "lloc": 207,
+    "sloc": 242,
+    "comments": 14,
+    "multi": 99,
+    "blank": 96,
+    "single_comments": 15
+  },
+  "beets\\plugins.py": {
+    "loc": 700,
+    "lloc": 322,
+    "sloc": 391,
+    "comments": 44,
+    "multi": 121,
+    "blank": 143,
+    "single_comments": 45
+  },
+  "beets\\__init__.py": {
+    "loc": 50,
+    "lloc": 21,
+    "sloc": 20,
+    "comments": 13,
+    "multi": 3,
+    "blank": 13,
+    "single_comments": 14
+  },
+  "beets\\__main__.py": {
+    "loc": 24,
+    "lloc": 6,
+    "sloc": 4,
+    "comments": 13,
+    "multi": 3,
+    "blank": 4,
+    "single_comments": 13
+  },
+  "beets\\autotag\\distance.py": {
+    "loc": 542,
+    "lloc": 304,
+    "sloc": 313,
+    "comments": 59,
+    "multi": 72,
+    "blank": 91,
+    "single_comments": 66
+  },
+  "beets\\autotag\\hooks.py": {
+    "loc": 536,
+    "lloc": 253,
+    "sloc": 389,
+    "comments": 30,
+    "multi": 38,
+    "blank": 70,
+    "single_comments": 39
+  },
+  "beets\\autotag\\match.py": {
+    "loc": 541,
+    "lloc": 277,
+    "sloc": 301,
+    "comments": 62,
+    "multi": 61,
+    "blank": 103,
+    "single_comments": 76
+  },
+  "beets\\autotag\\__init__.py": {
+    "loc": 66,
+    "lloc": 13,
+    "sloc": 41,
+    "comments": 14,
+    "multi": 0,
+    "blank": 10,
+    "single_comments": 15
+  },
+  "beets\\dbcore\\db.py": {
+    "loc": 1500,
+    "lloc": 781,
+    "sloc": 810,
+    "comments": 146,
+    "multi": 256,
+    "blank": 260,
+    "single_comments": 174
+  },
+  "beets\\dbcore\\pathutils.py": {
+    "loc": 53,
+    "lloc": 34,
+    "sloc": 31,
+    "comments": 0,
+    "multi": 0,
+    "blank": 17,
+    "single_comments": 5
+  },
+  "beets\\dbcore\\query.py": {
+    "loc": 932,
+    "lloc": 507,
+    "sloc": 512,
+    "comments": 54,
+    "multi": 151,
+    "blank": 205,
+    "single_comments": 64
+  },
+  "beets\\dbcore\\queryparse.py": {
+    "loc": 271,
+    "lloc": 103,
+    "sloc": 130,
+    "comments": 47,
+    "multi": 59,
+    "blank": 42,
+    "single_comments": 40
+  },
+  "beets\\dbcore\\sort.py": {
+    "loc": 225,
+    "lloc": 124,
+    "sloc": 126,
+    "comments": 18,
+    "multi": 24,
+    "blank": 52,
+    "single_comments": 23
+  },
+  "beets\\dbcore\\types.py": {
+    "loc": 502,
+    "lloc": 282,
+    "sloc": 261,
+    "comments": 37,
+    "multi": 75,
+    "blank": 121,
+    "single_comments": 45
+  },
+  "beets\\dbcore\\__init__.py": {
+    "loc": 50,
+    "lloc": 6,
+    "sloc": 31,
+    "comments": 13,
+    "multi": 3,
+    "blank": 3,
+    "single_comments": 13
+  },
+  "beets\\importer\\session.py": {
+    "loc": 309,
+    "lloc": 175,
+    "sloc": 176,
+    "comments": 39,
+    "multi": 39,
+    "blank": 52,
+    "single_comments": 42
+  },
+  "beets\\importer\\stages.py": {
+    "loc": 402,
+    "lloc": 192,
+    "sloc": 211,
+    "comments": 61,
+    "multi": 46,
+    "blank": 83,
+    "single_comments": 62
+  },
+  "beets\\importer\\state.py": {
+    "loc": 140,
+    "lloc": 70,
+    "sloc": 66,
+    "comments": 21,
+    "multi": 24,
+    "blank": 26,
+    "single_comments": 24
+  },
+  "beets\\importer\\tasks.py": {
+    "loc": 1284,
+    "lloc": 644,
+    "sloc": 746,
+    "comments": 131,
+    "multi": 204,
+    "blank": 200,
+    "single_comments": 134
+  },
+  "beets\\importer\\__init__.py": {
+    "loc": 38,
+    "lloc": 4,
+    "sloc": 17,
+    "comments": 14,
+    "multi": 3,
+    "blank": 4,
+    "single_comments": 14
+  },
+  "beets\\library\\exceptions.py": {
+    "loc": 42,
+    "lloc": 19,
+    "sloc": 14,
+    "comments": 4,
+    "multi": 10,
+    "blank": 12,
+    "single_comments": 6
+  },
+  "beets\\library\\fields.py": {
+    "loc": 103,
+    "lloc": 3,
+    "sloc": 102,
+    "comments": 0,
+    "multi": 0,
+    "blank": 1,
+    "single_comments": 0
+  },
+  "beets\\library\\library.py": {
+    "loc": 189,
+    "lloc": 108,
+    "sloc": 114,
+    "comments": 12,
+    "multi": 20,
+    "blank": 36,
+    "single_comments": 19
+  },
+  "beets\\library\\migrations.py": {
+    "loc": 263,
+    "lloc": 135,
+    "sloc": 190,
+    "comments": 6,
+    "multi": 0,
+    "blank": 59,
+    "single_comments": 14
+  },
+  "beets\\library\\models.py": {
+    "loc": 1535,
+    "lloc": 760,
+    "sloc": 911,
+    "comments": 98,
+    "multi": 255,
+    "blank": 263,
+    "single_comments": 106
+  },
+  "beets\\library\\queries.py": {
+    "loc": 58,
+    "lloc": 25,
+    "sloc": 31,
+    "comments": 4,
+    "multi": 9,
+    "blank": 14,
+    "single_comments": 4
+  },
+  "beets\\library\\__init__.py": {
+    "loc": 29,
+    "lloc": 9,
+    "sloc": 23,
+    "comments": 0,
+    "multi": 0,
+    "blank": 6,
+    "single_comments": 0
+  },
+  "beets\\test\\helper.py": {
+    "loc": 907,
+    "lloc": 496,
+    "sloc": 580,
+    "comments": 36,
+    "multi": 100,
+    "blank": 186,
+    "single_comments": 41
+  },
+  "beets\\test\\_common.py": {
+    "loc": 233,
+    "lloc": 95,
+    "sloc": 149,
+    "comments": 22,
+    "multi": 8,
+    "blank": 51,
+    "single_comments": 25
+  },
+  "beets\\test\\__init__.py": {
+    "loc": 19,
+    "lloc": 1,
+    "sloc": 0,
+    "comments": 13,
+    "multi": 5,
+    "blank": 1,
+    "single_comments": 13
+  },
+  "beets\\ui\\__init__.py": {
+    "loc": 1000,
+    "lloc": 482,
+    "sloc": 587,
+    "comments": 106,
+    "multi": 142,
+    "blank": 165,
+    "single_comments": 106
+  },
+  "beets\\ui\\commands\\completion.py": {
+    "loc": 117,
+    "lloc": 58,
+    "sloc": 77,
+    "comments": 11,
+    "multi": 4,
+    "blank": 26,
+    "single_comments": 10
+  },
+  "beets\\ui\\commands\\config.py": {
+    "loc": 97,
+    "lloc": 47,
+    "sloc": 70,
+    "comments": 9,
+    "multi": 3,
+    "blank": 14,
+    "single_comments": 10
+  },
+  "beets\\ui\\commands\\fields.py": {
+    "loc": 40,
+    "lloc": 22,
+    "sloc": 22,
+    "comments": 1,
+    "multi": 3,
+    "blank": 13,
+    "single_comments": 2
+  },
+  "beets\\ui\\commands\\help.py": {
+    "loc": 23,
+    "lloc": 15,
+    "sloc": 18,
+    "comments": 0,
+    "multi": 0,
+    "blank": 4,
+    "single_comments": 1
+  },
+  "beets\\ui\\commands\\list.py": {
+    "loc": 25,
+    "lloc": 16,
+    "sloc": 14,
+    "comments": 0,
+    "multi": 3,
+    "blank": 7,
+    "single_comments": 1
+  },
+  "beets\\ui\\commands\\modify.py": {
+    "loc": 168,
+    "lloc": 77,
+    "sloc": 123,
+    "comments": 8,
+    "multi": 16,
+    "blank": 21,
+    "single_comments": 8
+  },
+  "beets\\ui\\commands\\move.py": {
+    "loc": 202,
+    "lloc": 85,
+    "sloc": 148,
+    "comments": 10,
+    "multi": 14,
+    "blank": 30,
+    "single_comments": 10
+  },
+  "beets\\ui\\commands\\remove.py": {
+    "loc": 84,
+    "lloc": 39,
+    "sloc": 56,
+    "comments": 7,
+    "multi": 3,
+    "blank": 17,
+    "single_comments": 8
+  },
+  "beets\\ui\\commands\\stats.py": {
+    "loc": 62,
+    "lloc": 39,
+    "sloc": 46,
+    "comments": 1,
+    "multi": 0,
+    "blank": 13,
+    "single_comments": 3
+  },
+  "beets\\ui\\commands\\update.py": {
+    "loc": 192,
+    "lloc": 91,
+    "sloc": 133,
+    "comments": 31,
+    "multi": 7,
+    "blank": 22,
+    "single_comments": 30
+  },
+  "beets\\ui\\commands\\utils.py": {
+    "loc": 29,
+    "lloc": 18,
+    "sloc": 16,
+    "comments": 0,
+    "multi": 6,
+    "blank": 6,
+    "single_comments": 1
+  },
+  "beets\\ui\\commands\\version.py": {
+    "loc": 23,
+    "lloc": 15,
+    "sloc": 14,
+    "comments": 1,
+    "multi": 0,
+    "blank": 7,
+    "single_comments": 2
+  },
+  "beets\\ui\\commands\\write.py": {
+    "loc": 60,
+    "lloc": 27,
+    "sloc": 37,
+    "comments": 6,
+    "multi": 3,
+    "blank": 13,
+    "single_comments": 7
+  },
+  "beets\\ui\\commands\\__init__.py": {
+    "loc": 67,
+    "lloc": 21,
+    "sloc": 39,
+    "comments": 15,
+    "multi": 3,
+    "blank": 9,
+    "single_comments": 16
+  },
+  "beets\\ui\\commands\\import_\\display.py": {
+    "loc": 393,
+    "lloc": 244,
+    "sloc": 259,
+    "comments": 42,
+    "multi": 31,
+    "blank": 56,
+    "single_comments": 47
+  },
+  "beets\\ui\\commands\\import_\\session.py": {
+    "loc": 541,
+    "lloc": 263,
+    "sloc": 363,
+    "comments": 53,
+    "multi": 53,
+    "blank": 71,
+    "single_comments": 54
+  },
+  "beets\\ui\\commands\\import_\\__init__.py": {
+    "loc": 349,
+    "lloc": 114,
+    "sloc": 282,
+    "comments": 19,
+    "multi": 10,
+    "blank": 36,
+    "single_comments": 21
+  },
+  "beets\\util\\artresizer.py": {
+    "loc": 857,
+    "lloc": 426,
+    "sloc": 555,
+    "comments": 84,
+    "multi": 76,
+    "blank": 134,
+    "single_comments": 92
+  },
+  "beets\\util\\bluelet.py": {
+    "loc": 657,
+    "lloc": 397,
+    "sloc": 353,
+    "comments": 54,
+    "multi": 91,
+    "blank": 143,
+    "single_comments": 70
+  },
+  "beets\\util\\color.py": {
+    "loc": 215,
+    "lloc": 75,
+    "sloc": 165,
+    "comments": 23,
+    "multi": 10,
+    "blank": 19,
+    "single_comments": 21
+  },
+  "beets\\util\\config.py": {
+    "loc": 80,
+    "lloc": 50,
+    "sloc": 50,
+    "comments": 0,
+    "multi": 18,
+    "blank": 12,
+    "single_comments": 0
+  },
+  "beets\\util\\deprecation.py": {
+    "loc": 89,
+    "lloc": 40,
+    "sloc": 56,
+    "comments": 0,
+    "multi": 11,
+    "blank": 22,
+    "single_comments": 0
+  },
+  "beets\\util\\diff.py": {
+    "loc": 110,
+    "lloc": 57,
+    "sloc": 68,
+    "comments": 6,
+    "multi": 9,
+    "blank": 26,
+    "single_comments": 7
+  },
+  "beets\\util\\extension.py": {
+    "loc": 182,
+    "lloc": 69,
+    "sloc": 128,
+    "comments": 22,
+    "multi": 11,
+    "blank": 20,
+    "single_comments": 23
+  },
+  "beets\\util\\functemplate.py": {
+    "loc": 593,
+    "lloc": 323,
+    "sloc": 330,
+    "comments": 65,
+    "multi": 86,
+    "blank": 108,
+    "single_comments": 69
+  },
+  "beets\\util\\hidden.py": {
+    "loc": 62,
+    "lloc": 23,
+    "sloc": 21,
+    "comments": 23,
+    "multi": 3,
+    "blank": 14,
+    "single_comments": 24
+  },
+  "beets\\util\\id_extractors.py": {
+    "loc": 69,
+    "lloc": 17,
+    "sloc": 38,
+    "comments": 24,
+    "multi": 5,
+    "blank": 12,
+    "single_comments": 14
+  },
+  "beets\\util\\layout.py": {
+    "loc": 352,
+    "lloc": 192,
+    "sloc": 210,
+    "comments": 59,
+    "multi": 35,
+    "blank": 43,
+    "single_comments": 64
+  },
+  "beets\\util\\lyrics.py": {
+    "loc": 163,
+    "lloc": 114,
+    "sloc": 105,
+    "comments": 5,
+    "multi": 14,
+    "blank": 30,
+    "single_comments": 14
+  },
+  "beets\\util\\m3u.py": {
+    "loc": 97,
+    "lloc": 47,
+    "sloc": 44,
+    "comments": 15,
+    "multi": 17,
+    "blank": 18,
+    "single_comments": 18
+  },
+  "beets\\util\\pathformats.py": {
+    "loc": 31,
+    "lloc": 13,
+    "sloc": 14,
+    "comments": 1,
+    "multi": 6,
+    "blank": 10,
+    "single_comments": 1
+  },
+  "beets\\util\\pipeline.py": {
+    "loc": 505,
+    "lloc": 263,
+    "sloc": 249,
+    "comments": 63,
+    "multi": 94,
+    "blank": 98,
+    "single_comments": 64
+  },
+  "beets\\util\\units.py": {
+    "loc": 61,
+    "lloc": 38,
+    "sloc": 39,
+    "comments": 1,
+    "multi": 10,
+    "blank": 10,
+    "single_comments": 2
+  },
+  "beets\\util\\__init__.py": {
+    "loc": 1209,
+    "lloc": 590,
+    "sloc": 640,
+    "comments": 112,
+    "multi": 236,
+    "blank": 224,
+    "single_comments": 109
+  }
+}
