@@ -80,31 +80,16 @@ AUDIO_EXTENSIONS = {
 }
 
 
-def fix_extension(path_bytes: PathBytes, logger: Logger | None = None):
-    """Return the `path` after adding an appropriate extension if needed.
-
-    If the file already has an extension, return as-is.
-    If the file has no extension, try to find the format using ffprobe.
-    If the file is not a music format, return as-is.
-    If the format is found, return path with extension.
-    """
-    path = Path(os.fsdecode(path_bytes))
-    # if there is an extension, return unchanged
-    if path.suffix != "":
-        return path_bytes
-
-    # no extension detected
-    # use ffprobe to find the format
-    formats = []
-    shell = os.name == "nt"
+def _probe_formats(path: Path, shell: bool, logger: Logger | None) -> list[str]:
+    """Return the list of format names reported by ffprobe."""
     if (
-        subprocess.run(
-            ["ffprobe", "-version"], capture_output=True, shell=shell
-        ).stderr.decode("utf-8")
+        subprocess.run(["ffprobe", "-version"], capture_output=True, shell=shell)
+        .stderr.decode("utf-8")
         != ""
     ):
         if logger:
             logger.error("ffprobe needed to determine file extension")
+
     output = subprocess.run(
         [
             "ffprobe",
@@ -123,15 +108,50 @@ def fix_extension(path_bytes: PathBytes, logger: Logger | None = None):
     if err != "":
         if logger:
             logger.error("Error with ffprobe\n", err)
+
+    formats = []
     for line in out.split("\n"):
         if line.startswith("format_name="):
             formats = line.split("=")[1].split(",")
-    detected_format = ""
-    # The first format from ffprobe that is on this list is taken
+    return formats
+
+
+def _select_audio_extension(formats: list[str]) -> str:
+    """Pick the first recognized audio extension from ffprobe output."""
     for f in formats:
         if f in AUDIO_EXTENSIONS:
-            detected_format = f
-            break
+            return f
+    return ""
+
+
+def _materialize_extension(path: Path, detected_format: str) -> Path:
+    """Create the target path with the detected extension."""
+    new_path = path.with_suffix("." + detected_format)
+    if not new_path.exists():
+        if beets.config["import"]["fix_ext_inplace"]:
+            util.move(bytes(path), bytes(new_path))
+        else:
+            util.copy(bytes(path), bytes(new_path))
+    return new_path
+
+
+def fix_extension(path_bytes: PathBytes, logger: Logger | None = None):
+    """Return the `path` after adding an appropriate extension if needed.
+
+    If the file already has an extension, return as-is.
+    If the file has no extension, try to find the format using ffprobe.
+    If the file is not a music format, return as-is.
+    If the format is found, return path with extension.
+    """
+    path = Path(os.fsdecode(path_bytes))
+    # if there is an extension, return unchanged
+    if path.suffix != "":
+        return path_bytes
+
+    # no extension detected
+    shell = os.name == "nt"
+    formats = _probe_formats(path, shell, logger)
+    detected_format = _select_audio_extension(formats)
 
     # if ffprobe can't find a format, the file is prob not music
     if detected_format == "":
@@ -140,15 +160,11 @@ def fix_extension(path_bytes: PathBytes, logger: Logger | None = None):
     # cp and add ext. If already exist, use that file
     # assume, for example, the only diff between 'asdf.mp3' and 'asdf' is format
     new_path = path.with_suffix("." + detected_format)
-    if not new_path.exists():
-        if beets.config["import"]["fix_ext_inplace"]:
-            util.move(bytes(path), bytes(new_path))
-        else:
-            util.copy(bytes(path), bytes(new_path))
-    else:
+    if new_path.exists():
         if logger:
             logger.info("Import file with matching format to original target")
-    return new_path
+        return new_path
+    return _materialize_extension(path, detected_format)
 
 
 def remux_mpeglayer3_wav(path: util.PathBytes) -> util.PathBytes | None:

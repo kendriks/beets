@@ -426,6 +426,109 @@ def track_distance(
     return dist
 
 
+def _add_album_artist_and_title_distance(
+    dist: Distance, likelies: dict[str, Any], album_info: AlbumInfo
+) -> None:
+    if not album_info.va:
+        dist.add_string("artist", likelies["artist"], album_info.artist)
+
+    dist.add_string("album", likelies["album"], album_info.album)
+
+
+def _add_album_media_distance(
+    dist: Distance, likelies: dict[str, Any], album_info: AlbumInfo
+) -> None:
+    if not album_info.media:
+        return
+
+    preferred_config = config["match"]["preferred"]
+    media_patterns: Sequence[str] = preferred_config["media"].as_str_seq()
+    options = [re.compile(rf"(\d+x)?({pat})", re.I) for pat in media_patterns]
+    if options:
+        dist.add_priority("media", album_info.media, options)
+    elif likelies["media"]:
+        dist.add_equality("media", album_info.media, likelies["media"])
+
+
+def _add_album_year_distance(
+    dist: Distance, likelies: dict[str, Any], album_info: AlbumInfo
+) -> None:
+    preferred_config = config["match"]["preferred"]
+
+    if album_info.year and preferred_config["original_year"]:
+        # Assume 1889 (earliest first gramophone discs) if we don't know the
+        # original year.
+        original = album_info.original_year or 1889
+        diff = abs(album_info.year - original)
+        diff_max = abs(datetime.date.today().year - original)
+        dist.add_ratio("year", diff, diff_max)
+        return
+
+    if not (likelies["year"] and album_info.year):
+        return
+
+    if likelies["year"] in (album_info.year, album_info.original_year):
+        # No penalty for matching release or original year.
+        dist.add("year", 0.0)
+    elif album_info.original_year:
+        # Prefer matches closest to the release year.
+        diff = abs(likelies["year"] - album_info.year)
+        diff_max = abs(datetime.date.today().year - album_info.original_year)
+        dist.add_ratio("year", diff, diff_max)
+    else:
+        # Full penalty when there is no original year.
+        dist.add("year", 1.0)
+
+
+def _add_album_country_distance(
+    dist: Distance, likelies: dict[str, Any], album_info: AlbumInfo
+) -> None:
+    preferred_config = config["match"]["preferred"]
+    country_patterns: Sequence[str] = preferred_config["countries"].as_str_seq()
+    options = [re.compile(pat, re.I) for pat in country_patterns]
+
+    if album_info.country and options:
+        dist.add_priority("country", album_info.country, options)
+    elif likelies["country"] and album_info.country:
+        dist.add_string("country", likelies["country"], album_info.country)
+
+
+def _add_album_tag_distance(
+    dist: Distance, likelies: dict[str, Any], album_info: AlbumInfo
+) -> None:
+    if likelies["label"] and album_info.label:
+        dist.add_string("label", likelies["label"], album_info.label)
+
+    if likelies["catalognum"] and album_info.catalognum:
+        dist.add_string("catalognum", likelies["catalognum"], album_info.catalognum)
+
+    if likelies["albumdisambig"] and album_info.albumdisambig:
+        dist.add_string(
+            "albumdisambig", likelies["albumdisambig"], album_info.albumdisambig
+        )
+
+    if likelies["mb_albumid"]:
+        dist.add_equality("album_id", likelies["mb_albumid"], album_info.album_id)
+
+
+def _add_album_track_distances(
+    dist: Distance,
+    items: Sequence[Item],
+    album_info: AlbumInfo,
+    item_info_pairs: list[tuple[Item, TrackInfo]],
+) -> None:
+    dist.tracks = {}
+    for item, track in item_info_pairs:
+        dist.tracks[track] = track_distance(item, track, album_info.va)
+        dist.add("tracks", dist.tracks[track].distance)
+
+    for _ in range(len(album_info.tracks) - len(item_info_pairs)):
+        dist.add("missing_tracks", 1.0)
+
+    for _ in range(len(items) - len(item_info_pairs)):
+        dist.add("unmatched_tracks", 1.0)
+
+
 def distance(
     items: Sequence[Item],
     album_info: AlbumInfo,
@@ -443,99 +546,18 @@ def distance(
 
     dist = Distance()
 
-    # Artist, if not various.
-    if not album_info.va:
-        dist.add_string("artist", likelies["artist"], album_info.artist)
-
-    # Album.
-    dist.add_string("album", likelies["album"], album_info.album)
-
-    preferred_config = config["match"]["preferred"]
-    # Current or preferred media.
-    if album_info.media:
-        # Preferred media options.
-        media_patterns: Sequence[str] = preferred_config["media"].as_str_seq()
-        options = [
-            re.compile(rf"(\d+x)?({pat})", re.I) for pat in media_patterns
-        ]
-        if options:
-            dist.add_priority("media", album_info.media, options)
-        # Current media.
-        elif likelies["media"]:
-            dist.add_equality("media", album_info.media, likelies["media"])
+    _add_album_artist_and_title_distance(dist, likelies, album_info)
+    _add_album_media_distance(dist, likelies, album_info)
 
     # Mediums.
     if likelies["disctotal"] and album_info.mediums:
         dist.add_number("mediums", likelies["disctotal"], album_info.mediums)
 
-    # Prefer earliest release.
-    if album_info.year and preferred_config["original_year"]:
-        # Assume 1889 (earliest first gramophone discs) if we don't know the
-        # original year.
-        original = album_info.original_year or 1889
-        diff = abs(album_info.year - original)
-        diff_max = abs(datetime.date.today().year - original)
-        dist.add_ratio("year", diff, diff_max)
-    # Year.
-    elif likelies["year"] and album_info.year:
-        if likelies["year"] in (album_info.year, album_info.original_year):
-            # No penalty for matching release or original year.
-            dist.add("year", 0.0)
-        elif album_info.original_year:
-            # Prefer matchest closest to the release year.
-            diff = abs(likelies["year"] - album_info.year)
-            diff_max = abs(
-                datetime.date.today().year - album_info.original_year
-            )
-            dist.add_ratio("year", diff, diff_max)
-        else:
-            # Full penalty when there is no original year.
-            dist.add("year", 1.0)
+    _add_album_year_distance(dist, likelies, album_info)
 
-    # Preferred countries.
-    country_patterns: Sequence[str] = preferred_config["countries"].as_str_seq()
-    options = [re.compile(pat, re.I) for pat in country_patterns]
-    if album_info.country and options:
-        dist.add_priority("country", album_info.country, options)
-    # Country.
-    elif likelies["country"] and album_info.country:
-        dist.add_string("country", likelies["country"], album_info.country)
-
-    # Label.
-    if likelies["label"] and album_info.label:
-        dist.add_string("label", likelies["label"], album_info.label)
-
-    # Catalog number.
-    if likelies["catalognum"] and album_info.catalognum:
-        dist.add_string(
-            "catalognum", likelies["catalognum"], album_info.catalognum
-        )
-
-    # Disambiguation.
-    if likelies["albumdisambig"] and album_info.albumdisambig:
-        dist.add_string(
-            "albumdisambig", likelies["albumdisambig"], album_info.albumdisambig
-        )
-
-    # Album ID.
-    if likelies["mb_albumid"]:
-        dist.add_equality(
-            "album_id", likelies["mb_albumid"], album_info.album_id
-        )
-
-    # Tracks.
-    dist.tracks = {}
-    for item, track in item_info_pairs:
-        dist.tracks[track] = track_distance(item, track, album_info.va)
-        dist.add("tracks", dist.tracks[track].distance)
-
-    # Missing tracks.
-    for _ in range(len(album_info.tracks) - len(item_info_pairs)):
-        dist.add("missing_tracks", 1.0)
-
-    # Unmatched tracks.
-    for _ in range(len(items) - len(item_info_pairs)):
-        dist.add("unmatched_tracks", 1.0)
+    _add_album_country_distance(dist, likelies, album_info)
+    _add_album_tag_distance(dist, likelies, album_info)
+    _add_album_track_distances(dist, items, album_info, item_info_pairs)
 
     dist.add_data_source(likelies["data_source"], album_info.data_source)
 

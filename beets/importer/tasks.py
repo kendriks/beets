@@ -1182,6 +1182,49 @@ def is_subdir_of_any_in_list(path, dirs):
     return any(d in ancestors for d in dirs)
 
 
+def _continue_collapsing(root, collapse_paths, collapse_pat):
+    return is_subdir_of_any_in_list(root, collapse_paths) or (
+        collapse_pat and collapse_pat.match(os.path.basename(root))
+    )
+
+
+def _matches_multidisc_subdirs(dirs, marker_pat):
+    subdir_pat = None
+    for subdir in dirs:
+        subdir = util.bytestring_path(subdir)
+        if not subdir_pat:
+            match = marker_pat.match(subdir)
+            if not match:
+                return False
+            match_group = re.escape(match.group(1))
+            subdir_pat = re.compile(b"".join([b"^", match_group, rb"\d"]), re.I)
+        elif not subdir_pat.match(subdir):
+            return False
+
+    return True
+
+
+def _start_multidisc_collapse(root, dirs, items):
+    basename = os.path.basename(root)
+
+    if dirs and not items:
+        for marker_pat in MULTIDISC_PATTERNS:
+            if _matches_multidisc_subdirs(dirs, marker_pat):
+                return True, None
+
+        return False, None
+
+    for marker_pat in MULTIDISC_PATTERNS:
+        match = marker_pat.match(basename)
+        if match:
+            collapse_pat = re.compile(
+                b"".join([b"^", re.escape(match.group(1)), rb"\d"]), re.I
+            )
+            return True, collapse_pat
+
+    return False, None
+
+
 def albums_in_dir(path: util.PathBytes):
     """Recursively searches the given directory and returns an iterable
     of (paths, items) where paths is a list of directories and items is
@@ -1204,68 +1247,23 @@ def albums_in_dir(path: util.PathBytes):
         # and add the current directory. If so, just add the directory
         # and move on to the next directory. If not, stop collapsing.
         if collapse_paths:
-            if (is_subdir_of_any_in_list(root, collapse_paths)) or (
-                collapse_pat and collapse_pat.match(os.path.basename(root))
-            ):
+            if _continue_collapsing(root, collapse_paths, collapse_pat):
                 # Still collapsing.
                 collapse_paths.append(root)
                 collapse_items += items
                 continue
-            else:
-                # Collapse finished. Yield the collapsed directory and
-                # proceed to process the current one.
-                if collapse_items:
-                    yield collapse_paths, collapse_items
-                collapse_pat, collapse_paths, collapse_items = None, [], []
+            # Collapse finished. Yield the collapsed directory and
+            # proceed to process the current one.
+            if collapse_items:
+                yield collapse_paths, collapse_items
+            collapse_pat, collapse_paths, collapse_items = None, [], []
 
         # Check whether this directory looks like the *first* directory
         # in a multi-disc sequence. There are two indicators: the file
         # is named like part of a multi-disc sequence (e.g., "Title Disc
         # 1") or it contains no items but only directories that are
         # named in this way.
-        start_collapsing = False
-        for marker_pat in MULTIDISC_PATTERNS:
-            match = marker_pat.match(os.path.basename(root))
-
-            # Is this directory the root of a nested multi-disc album?
-            if dirs and not items:
-                # Check whether all subdirectories have the same prefix.
-                start_collapsing = True
-                subdir_pat = None
-                for subdir in dirs:
-                    subdir = util.bytestring_path(subdir)
-                    # The first directory dictates the pattern for
-                    # the remaining directories.
-                    if not subdir_pat:
-                        match = marker_pat.match(subdir)
-                        if match:
-                            match_group = re.escape(match.group(1))
-                            subdir_pat = re.compile(
-                                b"".join([b"^", match_group, rb"\d"]), re.I
-                            )
-                        else:
-                            start_collapsing = False
-                            break
-
-                    # Subsequent directories must match the pattern.
-                    elif not subdir_pat.match(subdir):
-                        start_collapsing = False
-                        break
-
-                # If all subdirectories match, don't check other
-                # markers.
-                if start_collapsing:
-                    break
-
-            # Is this directory the first in a flattened multi-disc album?
-            elif match:
-                start_collapsing = True
-                # Set the current pattern to match directories with the same
-                # prefix as this one, followed by a digit.
-                collapse_pat = re.compile(
-                    b"".join([b"^", re.escape(match.group(1)), rb"\d"]), re.I
-                )
-                break
+        start_collapsing, collapse_pat = _start_multidisc_collapse(root, dirs, items)
 
         # If either of the above heuristics indicated that this is the
         # beginning of a multi-disc album, initialize the collapsed

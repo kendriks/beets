@@ -190,6 +190,82 @@ def split_into_lines(string: str, first_width: int, width: int) -> list[str]:
     return _wrap_words(words, first_width, width)
 
 
+def _resolve_column_widths(
+    left: Side, right: Side, max_width: int, indent_str: str, separator: str
+) -> tuple[Side, Side]:
+    if left.width == -1 or right.width == -1:
+        # If widths have not been defined, set to share space.
+        width = (max_width - len(indent_str) - len(separator)) // 2
+        left = left._replace(width=width)
+        right = right._replace(width=width)
+    return left, right
+
+
+def _render_column_line(
+    i: int,
+    indent_str: str,
+    left: Side,
+    right: Side,
+    left_split: list[str],
+    right_split: list[str],
+    separator: str,
+) -> str:
+    out = indent_str
+
+    # Prefix or indent_str for line.
+    out += left.prefix if i == 0 else indent(left.prefix_width)
+
+    # Line i of left hand side contents.
+    if i < len(left_split):
+        out += left_split[i]
+        left_part_len = color_len(left_split[i])
+    else:
+        left_part_len = 0
+
+    # Padding until end of column.
+    # Note: differs from original
+    # column calcs in not -1 afterwards for space
+    # in track number as that is included in 'prefix'
+    padding = left.width - left.prefix_width - left_part_len
+
+    # Remove some padding on the first line to display
+    # length
+    if i == 0:
+        padding -= left.suffix_width
+
+    out += indent(padding)
+
+    if i == 0:
+        out += left.suffix
+
+    # Separator between columns.
+    out += separator if i == 0 else indent(len(separator))
+
+    # Right prefix, contents, padding, suffix.
+    out += right.prefix if i == 0 else indent(right.prefix_width)
+
+    # Line i of right hand side.
+    if i < len(right_split):
+        out += right_split[i]
+        right_part_len = color_len(right_split[i])
+    else:
+        right_part_len = 0
+
+    # Padding until end of column.
+    padding = right.width - right.prefix_width - right_part_len
+    # Remove some padding on the first line to display
+    # length
+    if i == 0:
+        padding -= right.suffix_width
+    out += indent(padding)
+
+    # Length in first line.
+    if i == 0:
+        out += right.suffix
+
+    return out
+
+
 def get_column_layout(
     indent_str: str, left: Side, right: Side, max_width: int, separator: str
 ) -> Iterator[str]:
@@ -205,11 +281,7 @@ def get_column_layout(
     With subsequent lines (i.e. {lhs1}, {rhs1} onwards) being the
     rest of contents, wrapped if the width would be otherwise exceeded.
     """
-    if left.width == -1 or right.width == -1:
-        # If widths have not been defined, set to share space.
-        width = (max_width - len(indent_str) - len(separator)) // 2
-        left = left._replace(width=width)
-        right = right._replace(width=width)
+    left, right = _resolve_column_widths(left, right, max_width, indent_str, separator)
     # On the first line, account for suffix as well as prefix
     left_width_without_prefix = left.width - left.prefix_width
     left_split = split_into_lines(
@@ -229,73 +301,15 @@ def get_column_layout(
 
     out = ""
     for i in range(max_line_count):
-        # indentation
-        out += indent_str
-
-        # Prefix or indent_str for line
-        if i == 0:
-            out += left.prefix
-        else:
-            out += indent(left.prefix_width)
-
-        # Line i of left hand side contents.
-        if i < len(left_split):
-            out += left_split[i]
-            left_part_len = color_len(left_split[i])
-        else:
-            left_part_len = 0
-
-        # Padding until end of column.
-        # Note: differs from original
-        # column calcs in not -1 afterwards for space
-        # in track number as that is included in 'prefix'
-        padding = left.width - left.prefix_width - left_part_len
-
-        # Remove some padding on the first line to display
-        # length
-        if i == 0:
-            padding -= left.suffix_width
-
-        out += indent(padding)
-
-        if i == 0:
-            out += left.suffix
-
-        # Separator between columns.
-        if i == 0:
-            out += separator
-        else:
-            out += indent(len(separator))
-
-        # Right prefix, contents, padding, suffix
-        if i == 0:
-            out += right.prefix
-        else:
-            out += indent(right.prefix_width)
-
-        # Line i of right hand side.
-        if i < len(right_split):
-            out += right_split[i]
-            right_part_len = color_len(right_split[i])
-        else:
-            right_part_len = 0
-
-        # Padding until end of column
-        padding = right.width - right.prefix_width - right_part_len
-        # Remove some padding on the first line to display
-        # length
-        if i == 0:
-            padding -= right.suffix_width
-        out += indent(padding)
-        # Length in first line
-        if i == 0:
-            out += right.suffix
+        out += _render_column_line(
+            i, indent_str, left, right, left_split, right_split, separator
+        )
 
         # Linebreak, except in the last line.
         if i < max_line_count - 1:
             out += "\n"
 
-    # Constructed all of the columns, now print
+    # Constructed all of the columns, now print.
     yield out
 
 

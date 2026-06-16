@@ -1168,23 +1168,45 @@ class Item(LibModel):
         basedir = basedir or self.db.directory
         path_formats = path_formats or self.db.path_formats
 
-        # Use a path format based on a query, falling back on the
-        # default.
+        path_format = self._select_path_format(path_formats)
+
+        subpath = self._destination_subpath(path_format)
+        lib_path_str, fallback = util.legalize_path(
+            subpath, self.db.replacements, self.filepath.suffix
+        )
+        if fallback:
+            # Print an error message if legalization fell back to
+            # default replacements because of the maximum length.
+            log.warning(
+                "Fell back to default replacements when naming "
+                "file {}. Configure replacements to avoid lengthening "
+                "the filename.",
+                subpath,
+            )
+        lib_path_bytes = util.bytestring_path(lib_path_str)
+
+        if relative_to_libdir:
+            return lib_path_bytes
+
+        return normpath(os.path.join(basedir, lib_path_bytes))
+
+    def _select_path_format(self, path_formats):
+        # Use a path format based on a query, falling back on the default.
         for query, path_format in path_formats:
             if query == PF_KEY_DEFAULT:
                 continue
             query, _ = parse_query_string(query, type(self))
             if query.match(self):
-                # The query matches the item! Use the corresponding path
-                # format.
-                break
-        else:
-            # No query matched; fall back to default.
-            for query, path_format in path_formats:
-                if query == PF_KEY_DEFAULT:
-                    break
-            else:
-                assert False, "no default path format"
+                return path_format
+
+        # No query matched; fall back to default.
+        for query, path_format in path_formats:
+            if query == PF_KEY_DEFAULT:
+                return path_format
+
+        assert False, "no default path format"
+
+    def _destination_subpath(self, path_format):
         if isinstance(path_format, Template):
             subpath_tmpl = path_format
         else:
@@ -1204,24 +1226,7 @@ class Item(LibModel):
                 subpath, beets.config["path_sep_replace"].as_str()
             )
 
-        lib_path_str, fallback = util.legalize_path(
-            subpath, self.db.replacements, self.filepath.suffix
-        )
-        if fallback:
-            # Print an error message if legalization fell back to
-            # default replacements because of the maximum length.
-            log.warning(
-                "Fell back to default replacements when naming "
-                "file {}. Configure replacements to avoid lengthening "
-                "the filename.",
-                subpath,
-            )
-        lib_path_bytes = util.bytestring_path(lib_path_str)
-
-        if relative_to_libdir:
-            return lib_path_bytes
-
-        return normpath(os.path.join(basedir, lib_path_bytes))
+        return subpath
 
 
 def _int_arg(s):

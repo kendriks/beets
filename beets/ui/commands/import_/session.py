@@ -152,44 +152,7 @@ class TerminalImportSession(importer.ImportSession):
             ("album" if task.is_album else "item"),
         )
 
-        if config["import"]["quiet"]:
-            # In quiet mode, don't prompt -- just skip.
-            log.info("Skipping.")
-            sel = "s"
-        else:
-            # Print some detail about the existing and new items so the
-            # user can make an informed decision.
-            for duplicate in found_duplicates:
-                ui.print_(
-                    "Old: "
-                    + summarize_items(
-                        (
-                            list(duplicate.items())
-                            if task.is_album
-                            else [duplicate]
-                        ),
-                        not task.is_album,
-                    )
-                )
-                if config["import"]["duplicate_verbose_prompt"]:
-                    if task.is_album:
-                        for dup in duplicate.items():
-                            print(f"  {dup}")
-                    else:
-                        print(f"  {duplicate}")
-
-            ui.print_(
-                "New: "
-                + summarize_items(task.imported_items(), not task.is_album)
-            )
-            if config["import"]["duplicate_verbose_prompt"]:
-                for item in task.imported_items():
-                    print(f"  {item}")
-
-            sel = ui.input_options(
-                ("Skip new", "Keep all", "Remove old", "Merge all")
-            )
-
+        sel = self._prompt_duplicate_resolution(task, found_duplicates)
         if sel == "s":
             # Skip new.
             task.set_choice(importer.Action.SKIP)
@@ -203,6 +166,42 @@ class TerminalImportSession(importer.ImportSession):
             task.should_merge_duplicates = True
         else:
             assert False
+
+    def _prompt_duplicate_resolution(self, task, found_duplicates):
+        if config["import"]["quiet"]:
+            # In quiet mode, don't prompt -- just skip.
+            log.info("Skipping.")
+            return "s"
+
+        # Print some detail about the existing and new items so the user can
+        # make an informed decision.
+        for duplicate in found_duplicates:
+            ui.print_(
+                "Old: "
+                + summarize_items(
+                    (
+                        list(duplicate.items())
+                        if task.is_album
+                        else [duplicate]
+                    ),
+                    not task.is_album,
+                )
+            )
+            if config["import"]["duplicate_verbose_prompt"]:
+                if task.is_album:
+                    for dup in duplicate.items():
+                        print(f"  {dup}")
+                else:
+                    print(f"  {duplicate}")
+
+        ui.print_(
+            "New: " + summarize_items(task.imported_items(), not task.is_album)
+        )
+        if config["import"]["duplicate_verbose_prompt"]:
+            for item in task.imported_items():
+                print(f"  {item}")
+
+        return ui.input_options(("Skip new", "Keep all", "Remove old", "Merge all"))
 
     def should_resume(self, path):
         return ui.input_yn(

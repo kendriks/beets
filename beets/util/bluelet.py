@@ -145,12 +145,8 @@ class WriteEvent(WaitableEvent):
 # Core logic for executing and scheduling threads.
 
 
-def _event_select(events):
-    """Perform a select() over all the Events provided, returning the
-    ones ready to be fired. Only WaitableEvents (including SleepEvents)
-    matter here; all other events are ignored (and thus postponed).
-    """
-    # Gather waitables and wakeup times.
+def _gather_waitables(events):
+    """Collect waitables and the earliest sleep deadline."""
     waitable_to_event = {}
     rlist, wlist, xlist = [], [], []
     earliest_wakeup = None
@@ -172,21 +168,20 @@ def _event_select(events):
             for waitable in x:
                 waitable_to_event[("x", waitable)] = event
 
-    # If we have a any sleeping threads, determine how long to sleep.
-    if earliest_wakeup:
-        timeout = max(earliest_wakeup - time.time(), 0.0)
-    else:
-        timeout = None
+    return waitable_to_event, rlist, wlist, xlist, earliest_wakeup
 
-    # Perform select() if we have any waitables.
+
+def _wait_for_ready(rlist, wlist, xlist, timeout):
+    """Wait for any I/O readiness or sleep timeout."""
     if rlist or wlist or xlist:
-        rready, wready, xready = select.select(rlist, wlist, xlist, timeout)
-    else:
-        rready, wready, xready = (), (), ()
-        if timeout:
-            time.sleep(timeout)
+        return select.select(rlist, wlist, xlist, timeout)
+    if timeout:
+        time.sleep(timeout)
+    return (), (), ()
 
-    # Gather ready events corresponding to the ready waitables.
+
+def _collect_ready_events(events, waitable_to_event, rready, wready, xready):
+    """Map ready waitables back to their events."""
     ready_events = set()
     for ready in rready:
         ready_events.add(waitable_to_event[("r", ready)])
@@ -195,12 +190,30 @@ def _event_select(events):
     for ready in xready:
         ready_events.add(waitable_to_event[("x", ready)])
 
-    # Gather any finished sleeps.
     for event in events:
         if isinstance(event, SleepEvent) and event.time_left() == 0.0:
             ready_events.add(event)
 
     return ready_events
+
+
+def _event_select(events):
+    """Perform a select() over all the Events provided, returning the
+    ones ready to be fired. Only WaitableEvents (including SleepEvents)
+    matter here; all other events are ignored (and thus postponed).
+    """
+    waitable_to_event, rlist, wlist, xlist, earliest_wakeup = _gather_waitables(
+        events
+    )
+
+    # If we have a any sleeping threads, determine how long to sleep.
+    if earliest_wakeup:
+        timeout = max(earliest_wakeup - time.time(), 0.0)
+    else:
+        timeout = None
+
+    rready, wready, xready = _wait_for_ready(rlist, wlist, xlist, timeout)
+    return _collect_ready_events(events, waitable_to_event, rready, wready, xready)
 
 
 class ThreadError(Exception):
